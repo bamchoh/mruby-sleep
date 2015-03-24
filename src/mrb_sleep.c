@@ -53,7 +53,11 @@ mrb_value mrb_f_sleep_sleep(mrb_state *mrb, mrb_value self)
         // not implemented forever sleep
         mrb_raise(mrb, E_ARGUMENT_ERROR, "wrong number of arguments");
     } else if (iargc == 1) {
+      if(MRB_TT_FIXNUM == argv[0].tt) {
+        sleep(mrb_float(argv[0]));
+      } else {
         sleep(mrb_fixnum(argv[0]));
+      }
     } else {
         mrb_raise(mrb, E_ARGUMENT_ERROR, "wrong number of arguments");
     }
